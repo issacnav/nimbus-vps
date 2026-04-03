@@ -1,8 +1,7 @@
 "use client";
 
-import { animate, motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { AnimatedMarkerRow } from "./SectionMarkers";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 import { TrustedBy } from "./TrustedBy";
 
 const EASE = [0.22, 1, 0.36, 1] as const;

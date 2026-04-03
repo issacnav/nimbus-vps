@@ -2,7 +2,7 @@
 
 import { animate, motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { AnimatedMarkerRow, PlusMarker } from "./SectionMarkers";
+import { PlusMarker } from "./SectionMarkers";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -32,13 +32,11 @@ function useCountUp(target: number, duration = 1.6) {
 
 function ChartBar({
   heightPct,
-  color,
   delay,
   hovered,
   onHover,
 }: {
   heightPct: number;
-  color: string;
   delay: number;
   hovered: boolean;
   onHover: (v: boolean) => void;
@@ -136,7 +134,6 @@ function WeeklyChart(): JSX.Element {
                 {(activeSeries === "both" || activeSeries === "cpu") && (
                   <ChartBar
                     heightPct={cpuSeries[i]}
-                    color="blue"
                     delay={i * 0.06}
                     hovered={hoveredDay === i}
                     onHover={() => {}}
@@ -145,7 +142,6 @@ function WeeklyChart(): JSX.Element {
                 {(activeSeries === "both" || activeSeries === "bw") && (
                   <ChartBar
                     heightPct={bwSeries[i]}
-                    color="teal"
                     delay={i * 0.06 + 0.03}
                     hovered={hoveredDay === i}
                     onHover={() => {}}
