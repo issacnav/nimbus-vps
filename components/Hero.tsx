@@ -349,18 +349,16 @@ export function Hero(): JSX.Element {
             className="mb-6 w-full text-center text-[clamp(36px,5vw,64px)] font-normal leading-[1.15] tracking-[-0.01em] text-white"
             style={{ textShadow: "0 4px 24px rgba(0,0,0,0.15)" }}
           >
-            <span className="block">Powering Product</span>
-            <span className="block">Development with Data</span>
+            <span className="block">Deploy Cloud Servers</span>
+            <span className="block">at Lightning Speed</span>
           </h1>
 
           {/* Subtitle */}
           <p 
-            className="mb-10 max-w-[760px] text-center text-[clamp(16px,2vw,20px)] font-normal leading-[1.6] text-white/90"
+            className="mb-10 max-w-[600px] text-center text-[clamp(16px,2vw,20px)] font-normal leading-[1.6] text-white/90"
             style={{ textShadow: "0 2px 12px rgba(0,0,0,0.15)" }}
           >
-            Boost development speed & make smarter decisions with a unified platform
-            <br className="hidden sm:block" />
-            for experimentation, analytics, feature flags, and session replays
+            Launch high-performance VPS instances globally in under 60 seconds.
           </p>
 
           {/* CTAs */}
