@@ -344,24 +344,20 @@ export function Hero(): JSX.Element {
         className="relative z-10 px-6 pb-20 pt-[108px] text-center sm:px-8 sm:pb-24"
       >
         <div className="mx-auto flex max-w-[720px] flex-col items-center">
-          {/* Badge pill */}
-          <div className="mb-6 inline-flex items-center gap-[7px] rounded-full border border-white/30 bg-white/[0.18] px-4 py-[7px] text-[12.5px] font-medium text-white backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.2)]">
-            <span className="h-[6px] w-[6px] rounded-full bg-[#22d3ee]" />
-            Now with 12 global edge regions
-          </div>
-
           {/* Headline */}
           <h1
-            className="mb-6 w-full font-google-sans text-center text-[clamp(38px,5.4vw,68px)] font-extrabold leading-[1.05] tracking-[-0.027em] text-white"
-            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.22), 0 4px 40px rgba(0,0,0,0.30)" }}
+            className="mb-5 w-full text-center text-[clamp(42px,6vw,72px)] font-medium leading-[1.1] tracking-[-0.02em] text-white"
+            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.1)" }}
           >
-            <span className="block">Deploy Cloud Servers</span>
-            <span className="block">at Lightning Speed</span>
+            <span className="block">Powering Product</span>
+            <span className="block">Development with Data</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="mb-10 whitespace-nowrap text-[16px] font-semibold leading-[1.7] text-white">
-            High-performance VPS instances, live in seconds.
+          <p className="mb-10 max-w-[700px] text-center text-[17px] font-normal leading-[1.6] text-white/95">
+            Boost development speed & make smarter decisions with a unified platform
+            <br className="hidden sm:block" />
+            for experimentation, analytics, feature flags, and session replays
           </p>
 
           {/* CTAs */}
@@ -370,18 +366,9 @@ export function Hero(): JSX.Element {
               type="button"
               whileHover={{ scale: 1.025, transition: { type: "spring", stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97, transition: { duration: 0.12 } }}
-              className="rounded-full bg-[#0f172a] px-10 py-[15px] text-[15px] font-semibold text-white shadow-[0_4px_24px_rgba(0,0,0,0.30)] transition-opacity duration-150 hover:opacity-90"
+              className="rounded-full bg-[#1a1a1a] px-8 py-[14px] text-[15px] font-medium text-white shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-colors duration-150 hover:bg-black"
             >
-              Start Free — $0 for 30 days
-            </motion.button>
-
-            <motion.button
-              type="button"
-              whileHover={{ scale: 1.025, transition: { type: "spring", stiffness: 400, damping: 20 } }}
-              whileTap={{ scale: 0.97, transition: { duration: 0.12 } }}
-              className="rounded-full bg-white px-9 py-[15px] text-[15px] font-semibold text-[#0f172a] shadow-[0_4px_16px_rgba(0,0,0,0.14)] transition-opacity duration-150 hover:opacity-90"
-            >
-              View Pricing
+              Create a Free Account
             </motion.button>
           </div>
         </div>
