@@ -47,7 +47,6 @@ export function TextGenerateEffect({
   }, [animate, duration, filter, initialDelay, scope, staggerDelay]);
 
   return (
-    // @ts-expect-error — dynamic tag is valid at runtime
     <Tag className={cn(className)} data-slot="text-generate-effect">
       <motion.span ref={scope} className="inline">
         {wordsArray.map((word, idx) => (
