@@ -69,7 +69,7 @@ function ChartBar({
 function WeeklyChart(): JSX.Element {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const cpuSeries = [38, 52, 44, 70, 58, 34, 48];
-  const bwSeries = [22, 35, 28, 45, 38, 18, 30];
+  const bwSeries = [22, 35, 31, 45, 38, 18, 30];
   const [hoveredDay, setHoveredDay] = useState<number | null>(null);
   const [activeSeries, setActiveSeries] = useState<"both" | "cpu" | "bw">("both");
 
@@ -321,9 +321,9 @@ function StatsFrame(): JSX.Element {
         transition={{ duration: 0.55, ease: EASE, delay: 0.2 }}
       >
         <div className="grid grid-cols-1 divide-y divide-[rgba(0,0,0,0.06)] dark:divide-[rgba(255,255,255,0.08)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          <StatCard value={99} suffix=".99%" label="Infra uptime for API & Console" delay={0.28} onHoverStart={() => setHoveredCard(0)} onHoverEnd={() => setHoveredCard(null)} />
-          <StatCard prefix="<" value={1} suffix="ms" label="Post-init evaluation latency" delay={0.38} onHoverStart={() => setHoveredCard(1)} onHoverEnd={() => setHoveredCard(null)} />
-          <StatCard value={50} suffix="B+" label="Network events processed per month" delay={0.48} onHoverStart={() => setHoveredCard(2)} onHoverEnd={() => setHoveredCard(null)} />
+          <StatCard value={99} suffix=".97%" label="Rolling 30-day API & Console uptime" delay={0.28} onHoverStart={() => setHoveredCard(0)} onHoverEnd={() => setHoveredCard(null)} />
+          <StatCard prefix="<" value={1} suffix="ms" label="P99 cold-start to ready (edge regions)" delay={0.38} onHoverStart={() => setHoveredCard(1)} onHoverEnd={() => setHoveredCard(null)} />
+          <StatCard value={47} suffix="B+" label="Network events processed per month" delay={0.48} onHoverStart={() => setHoveredCard(2)} onHoverEnd={() => setHoveredCard(null)} />
         </div>
       </motion.div>
 
@@ -354,8 +354,8 @@ export function InfraStats(): JSX.Element {
             Supported by Reliable Infrastructure
           </h2>
           <p className="mx-auto max-w-[500px] text-[16px] leading-[1.65] text-[#555] dark:text-slate-400">
-            NimbusVPS operates at global scale on bare-metal hardware, ensuring
-            industry-leading uptime and single-digit millisecond performance.
+            NimbusVPS is built for global scale on modern hardware, with
+            aggressive uptime targets and a control plane tuned for low latency.
           </p>
         </motion.div>
 

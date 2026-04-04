@@ -55,7 +55,7 @@ const PLANS = [
       "Unlimited bandwidth",
       "Unlimited cloud servers",
       "Bare-metal option",
-      "SLA-backed 99.99% uptime",
+      "SLA target 99.95% monthly uptime (excl. scheduled maintenance)",
       "Custom integrations & API",
     ],
   },

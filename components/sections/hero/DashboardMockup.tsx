@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useDarkClass } from "@/lib/useDarkClass";
 
@@ -122,11 +122,15 @@ const sidebarItems = [
   { label: "Firewall",   Icon: SbFirewallIcon,  active: false },
 ];
 
+/** Demo rows: numbers are illustrative; averages below are derived so the UI stays internally consistent. */
 const servers = [
-  { name: "web-prod-01", region: "US East",  ip: "142.93.12.41",  cpu: 42, ram: 68, status: "Running" },
-  { name: "api-gateway", region: "EU West",  ip: "165.22.197.8",  cpu: 27, ram: 45, status: "Running" },
-  { name: "db-replica",  region: "AP South", ip: "206.189.78.3",  cpu: 14, ram: 81, status: "Running" },
-] as const;
+  { name: "web-prod-01", region: "US East (NYC)", ip: "159.89.182.44", cpu: 37, ram: 73, status: "Running" as const },
+  { name: "api-gateway", region: "EU West (AMS)", ip: "104.248.91.201", cpu: 19, ram: 58, status: "Running" as const },
+  { name: "db-replica", region: "AP South (SGP)", ip: "134.209.23.117", cpu: 52, ram: 84, status: "Running" as const },
+];
+
+const avgCpu = Math.round(servers.reduce((acc, s) => acc + s.cpu, 0) / servers.length);
+const avgRam = Math.round(servers.reduce((acc, s) => acc + s.ram, 0) / servers.length);
 
 // ─── CPU Usage Bar ────────────────────────────────────────────────────────────
 
@@ -148,6 +152,9 @@ function UsageBar({ pct, color }: { pct: number; color: string }): JSX.Element {
 // ─── VPS Dashboard Mockup ─────────────────────────────────────────────────────
 
 export function VPSDashboard(): JSX.Element {
+  const uptimeDisplay = "99.96%";
+  const networkOut = { value: "1.87 TB", sub: "Last 24h · all regions", bar: 44 };
+
   return (
     <div className="relative overflow-hidden rounded-[16px] border border-[#e8e8e8] bg-white dark:border-slate-700 dark:bg-[#121a2e]">
       <BrowserChrome />
@@ -216,15 +223,17 @@ export function VPSDashboard(): JSX.Element {
             </div>
             <div className="mb-1.5">
               <div className="mb-1 flex justify-between text-[9px] text-[#9ca3af] dark:text-slate-500">
-                <span>CPU avg</span><span>28%</span>
+                <span>CPU avg</span>
+                <span>{avgCpu}%</span>
               </div>
-              <UsageBar pct={28} color="#0284c7" />
+              <UsageBar pct={avgCpu} color="#0284c7" />
             </div>
             <div>
               <div className="mb-1 flex justify-between text-[9px] text-[#9ca3af] dark:text-slate-500">
-                <span>RAM avg</span><span>65%</span>
+                <span>RAM avg</span>
+                <span>{avgRam}%</span>
               </div>
-              <UsageBar pct={65} color="#7c3aed" />
+              <UsageBar pct={avgRam} color="#7c3aed" />
             </div>
           </div>
         </div>
@@ -245,8 +254,8 @@ export function VPSDashboard(): JSX.Element {
             </div>
             <div className="hidden items-center gap-[5px] rounded-[7px] border border-[#e5e7eb] bg-white px-3 py-[6px] text-[#6b7280] dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-400 lg:flex">
               <LightningIcon />
-              <span className="text-[11px] font-semibold text-[#0f172a] dark:text-slate-100">99.99%</span>
-              <span className="text-[11px] text-[#9ca3af] dark:text-slate-500">Uptime</span>
+              <span className="text-[11px] font-semibold text-[#0f172a] dark:text-slate-100">{uptimeDisplay}</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-slate-500">Uptime (30d)</span>
             </div>
           </div>
 
@@ -311,9 +320,27 @@ export function VPSDashboard(): JSX.Element {
           {/* Bottom metrics row */}
           <div className="mt-4 grid grid-cols-3 gap-3">
             {[
-              { label: "Avg CPU",      value: "28%",    sub: "Across all servers", bar: 28, color: "#0284c7" },
-              { label: "Avg RAM",      value: "65%",    sub: "6.5 / 10 GB used",  bar: 65, color: "#7c3aed" },
-              { label: "Network Out",  value: "2.4 GB", sub: "Last 24 hours",      bar: 48, color: "#0d9488" },
+              {
+                label: "Avg CPU",
+                value: `${avgCpu}%`,
+                sub: "Fleet mean · 5m load",
+                bar: avgCpu,
+                color: "#0284c7",
+              },
+              {
+                label: "Avg RAM",
+                value: `${avgRam}%`,
+                sub: "Of allocated per instance",
+                bar: avgRam,
+                color: "#7c3aed",
+              },
+              {
+                label: "Network Out",
+                value: networkOut.value,
+                sub: networkOut.sub,
+                bar: networkOut.bar,
+                color: "#0d9488",
+              },
             ].map((metric) => (
               <div
                 key={metric.label}
