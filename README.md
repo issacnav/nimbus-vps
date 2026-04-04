@@ -1,6 +1,6 @@
-# NimbusVPS — marketing site
+# NimbusVPS: Mockup site
 
-Single-page marketing and product preview for **NimbusVPS**, a fictional-but-grounded VPS / cloud console brand. This repo is the **front-end only**: there is no real control plane, billing, or metrics API—numbers in the UI are **illustrative** and exist to sell the story of the product, not to report live infrastructure.
+Made this after getting inspired from a Dribbble design made by Plainthing Studio; below is the link to the reference. I have added a lot of micro-interactions and tried to use a static cloud image but didn’t get the desired result, so I went with Vanta.js for cloud generation.
 
 **Design inspiration:** [Tada — Product Development with Data Presenting](https://dribbble.com/shots/26511945-Tada-Product-Development-with-Data-Presenting) on Dribbble (HeyDetya).
 
