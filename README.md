@@ -2,6 +2,8 @@
 
 Single-page marketing and product preview for **NimbusVPS**, a fictional-but-grounded VPS / cloud console brand. This repo is the **front-end only**: there is no real control plane, billing, or metrics API—numbers in the UI are **illustrative** and exist to sell the story of the product, not to report live infrastructure.
 
+**Design inspiration:** [Tada — Product Development with Data Presenting](https://dribbble.com/shots/26511945-Tada-Product-Development-with-Data-Presenting) on Dribbble (HeyDetya).
+
 ## Stack
 
 - **Next.js 14** (App Router), **React 18**, **TypeScript**
