@@ -4,6 +4,14 @@
 
 :root {
   --foreground: #111111;
+  /* Single canvas color: hero, features, stats, pricing, footer — avoids visible seams */
+  --page-bg: #ffffff;
+}
+
+.dark {
+  /* Slightly lifted from flat black: cool navy + readable text */
+  --foreground: #f1f5f9;
+  --page-bg: #0a0f18;
 }
 
 * {
@@ -17,8 +25,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--page-bg);
   color: var(--foreground);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 a {

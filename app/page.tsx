@@ -7,8 +7,8 @@ import { ProductFeatures } from "@/components/ProductFeatures";
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-clip">
-      <div className="relative bg-white">
+    <main className="min-h-screen overflow-x-clip bg-[var(--page-bg)] transition-colors duration-200">
+      <div className="relative bg-[var(--page-bg)]">
         <div className="absolute inset-x-0 top-0 z-40">
           <Navbar />
         </div>

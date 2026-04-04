@@ -1,7 +1,16 @@
 "use client";
 
+import { useDarkClass } from "@/lib/useDarkClass";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+
+function resolvePlusColor(color: string, isDark: boolean) {
+  if (!isDark) return color;
+  if (color === "#111") return "#6b7280";
+  if (color === "#bbb") return "#52525b";
+  if (color === "#c0c0c0") return "#52525b";
+  return color;
+}
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -17,7 +26,7 @@ export function DotMarker({
 }): JSX.Element {
   return (
     <motion.div
-      className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#c8c8c8]"
+      className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#c8c8c8] dark:bg-[#525252]"
       initial={{ scale: 0, opacity: 0 }}
       animate={inView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
       transition={{ duration: 0.28, delay, ease: EASE }}
@@ -41,6 +50,9 @@ export function PlusMarker({
   color?: string;
   isHovered?: boolean;
 }): JSX.Element {
+  const isDark = useDarkClass();
+  const armColor = resolvePlusColor(color, isDark);
+
   return (
     <motion.div
       className="relative shrink-0"
@@ -60,12 +72,12 @@ export function PlusMarker({
       {/* horizontal arm */}
       <div
         className="absolute left-0 right-0 top-1/2"
-        style={{ height: thickness, background: color, transform: "translateY(-50%)" }}
+        style={{ height: thickness, background: armColor, transform: "translateY(-50%)" }}
       />
       {/* vertical arm */}
       <div
         className="absolute bottom-0 left-1/2 top-0"
-        style={{ width: thickness, background: color, transform: "translateX(-50%)" }}
+        style={{ width: thickness, background: armColor, transform: "translateX(-50%)" }}
       />
     </motion.div>
   );
@@ -81,11 +93,14 @@ export function AnimLine({
   delay: number;
   color?: string;
 }): JSX.Element {
+  const isDark = useDarkClass();
+  const lineBg = isDark && color === "#e0e0e0" ? "#3f3f46" : color;
+
   return (
     <div className="min-w-0 flex-1 overflow-hidden">
       <motion.div
         className="h-px w-full"
-        style={{ background: color, transformOrigin: "center" }}
+        style={{ background: lineBg, transformOrigin: "center" }}
         initial={{ scaleX: 0 }}
         animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
         transition={{ duration: 1.1, delay, ease: EASE }}

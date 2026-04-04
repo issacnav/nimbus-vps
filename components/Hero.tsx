@@ -1,5 +1,6 @@
 "use client";
 
+import { useDarkClass } from "@/lib/useDarkClass";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { VantaClouds } from "./VantaClouds";
@@ -11,14 +12,14 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 function BrowserChrome(): JSX.Element {
   return (
-    <div className="flex items-center gap-3 border-b border-[#e8e8e8] bg-[#f5f5f5] px-4 py-[10px]">
+    <div className="flex items-center gap-3 border-b border-[#e8e8e8] bg-[#f5f5f5] px-4 py-[10px] dark:border-slate-700 dark:bg-slate-900">
       <div className="flex items-center gap-[6px]">
         <div className="h-[11px] w-[11px] rounded-full bg-[#FF5F57]" />
         <div className="h-[11px] w-[11px] rounded-full bg-[#FEBC2E]" />
         <div className="h-[11px] w-[11px] rounded-full bg-[#28C840]" />
       </div>
       <div className="flex flex-1 justify-center">
-        <div className="flex w-[240px] items-center justify-center gap-[6px] rounded-[6px] bg-white px-3 py-[4px] text-[11.5px] text-[#9ca3af] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]">
+        <div className="flex w-[240px] items-center justify-center gap-[6px] rounded-[6px] border border-[#e5e7eb] bg-white px-3 py-[4px] text-[11.5px] text-[#9ca3af] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-500">
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
             <circle cx="5" cy="5" r="4" stroke="#9ca3af" strokeWidth="1" />
             <path d="M5 1c0 0-2 1.5-2 4s2 4 2 4" stroke="#9ca3af" strokeWidth="0.8" />
@@ -136,11 +137,15 @@ const servers = [
 // ─── CPU Usage Bar ────────────────────────────────────────────────────────────
 
 function UsageBar({ pct, color }: { pct: number; color: string }): JSX.Element {
+  const isDark = useDarkClass();
   return (
-    <div className="h-[4px] w-full overflow-hidden rounded-full bg-[#f0f0f2]">
+    <div className="h-[4px] w-full overflow-hidden rounded-full bg-[#f0f0f2] dark:bg-white/10">
       <div
-        className="h-full rounded-full"
-        style={{ width: `${pct}%`, background: color }}
+        className="h-full rounded-full dark:bg-white"
+        style={{
+          width: `${pct}%`,
+          ...(isDark ? {} : { background: color }),
+        }}
       />
     </div>
   );
@@ -150,11 +155,11 @@ function UsageBar({ pct, color }: { pct: number; color: string }): JSX.Element {
 
 function VPSDashboard(): JSX.Element {
   return (
-    <div className="relative overflow-hidden rounded-[16px] bg-white shadow-[0_32px_120px_rgba(0,0,0,0.18),0_8px_32px_rgba(0,0,0,0.08)]">
+    <div className="relative overflow-hidden rounded-[16px] border border-[#e8e8e8] bg-white dark:border-slate-700 dark:bg-[#121a2e]">
       <BrowserChrome />
 
       {/* App header */}
-      <div className="flex items-center justify-between border-b border-[#f0f0f0] bg-white px-4 py-[10px]">
+      <div className="flex items-center justify-between border-b border-[#f0f0f0] bg-white px-4 py-[10px] dark:border-slate-700 dark:bg-[#121a2e]">
         <div className="flex items-center gap-[8px]">
           <div className="flex h-6 w-6 items-center justify-center rounded-[6px] bg-[#0284c7]">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
@@ -165,20 +170,22 @@ function VPSDashboard(): JSX.Element {
               <rect x="1.5" y="7" width="10" height="3" rx="1" fill="white" />
             </svg>
           </div>
-          <span className="text-[13px] font-semibold text-[#0f172a] tracking-[-0.01em]">NimbusVPS</span>
-          <span className="rounded-[4px] bg-[#f0f9ff] px-[6px] py-[2px] text-[9px] font-semibold uppercase tracking-[0.06em] text-[#0284c7]">
+          <span className="text-[13px] font-semibold text-[#0f172a] tracking-[-0.01em] dark:text-slate-100">
+            NimbusVPS
+          </span>
+          <span className="rounded-[4px] bg-[#f0f9ff] px-[6px] py-[2px] text-[9px] font-semibold uppercase tracking-[0.06em] text-[#0284c7] dark:bg-sky-950/60 dark:text-sky-400">
             Console
           </span>
         </div>
 
         <div className="hidden items-center gap-2 sm:flex">
-          <div className="flex items-center gap-[5px] rounded-[6px] border border-[#e5e7eb] bg-[#fafafa] px-3 py-[5px] text-[11px] text-[#6b7280]">
+          <div className="flex items-center gap-[5px] rounded-[6px] border border-[#e5e7eb] bg-[#fafafa] px-3 py-[5px] text-[11px] text-[#6b7280] dark:border-slate-600 dark:bg-slate-800/80 dark:text-slate-400">
             <span className="h-[6px] w-[6px] rounded-full bg-[#22c55e]" />
             All systems operational
           </div>
           <button
             type="button"
-            className="rounded-[6px] bg-[#0284c7] px-3 py-[6px] text-[11.5px] font-semibold text-white shadow-[0_1px_4px_rgba(2,132,199,0.35)]"
+            className="rounded-[6px] bg-[#0284c7] px-3 py-[6px] text-[11.5px] font-semibold text-white"
           >
             + Deploy Server
           </button>
@@ -188,14 +195,14 @@ function VPSDashboard(): JSX.Element {
       {/* Body */}
       <div className="flex min-h-[340px]">
         {/* Sidebar */}
-        <div className="hidden w-[168px] shrink-0 flex-col border-r border-[#f0f0f0] bg-[#fafafa] py-3 sm:flex">
+        <div className="hidden w-[168px] shrink-0 flex-col border-r border-[#f0f0f0] bg-[#fafafa] py-3 dark:border-slate-700 dark:bg-slate-900/90 sm:flex">
           {sidebarItems.map((item) => (
             <div
               key={item.label}
               className={`mx-2 flex cursor-pointer items-center gap-[8px] rounded-[7px] px-3 py-[7px] text-[12px] ${
                 item.active
-                  ? "bg-[#eff6ff] font-semibold text-[#0284c7]"
-                  : "text-[#6b7280] hover:bg-[#f3f4f6]"
+                  ? "bg-[#eff6ff] font-semibold text-[#0284c7] dark:bg-sky-950/50 dark:text-sky-400"
+                  : "text-[#6b7280] hover:bg-[#f3f4f6] dark:text-slate-400 dark:hover:bg-slate-800"
               }`}
             >
               <span className="flex items-center opacity-70">
@@ -209,18 +216,18 @@ function VPSDashboard(): JSX.Element {
           ))}
 
           {/* Sidebar usage widget */}
-          <div className="mx-2 mt-auto rounded-[8px] border border-[#e5e7eb] bg-white p-3">
-            <div className="mb-2 text-[9px] font-bold uppercase tracking-[0.07em] text-[#0284c7]">
+          <div className="mx-2 mt-auto rounded-[8px] border border-[#e5e7eb] bg-white p-3 dark:border-slate-600 dark:bg-slate-800/60">
+            <div className="mb-2 text-[9px] font-bold uppercase tracking-[0.07em] text-[#0284c7] dark:text-sky-400">
               Resource Usage
             </div>
             <div className="mb-1.5">
-              <div className="mb-1 flex justify-between text-[9px] text-[#9ca3af]">
+              <div className="mb-1 flex justify-between text-[9px] text-[#9ca3af] dark:text-slate-500">
                 <span>CPU avg</span><span>28%</span>
               </div>
               <UsageBar pct={28} color="#0284c7" />
             </div>
             <div>
-              <div className="mb-1 flex justify-between text-[9px] text-[#9ca3af]">
+              <div className="mb-1 flex justify-between text-[9px] text-[#9ca3af] dark:text-slate-500">
                 <span>RAM avg</span><span>65%</span>
               </div>
               <UsageBar pct={65} color="#7c3aed" />
@@ -232,38 +239,42 @@ function VPSDashboard(): JSX.Element {
         <div className="flex-1 overflow-hidden px-5 py-4">
           {/* Top stat pills */}
           <div className="mb-4 flex items-center gap-3">
-            <div className="flex items-center gap-[5px] rounded-[7px] border border-[#e5e7eb] bg-white px-3 py-[6px]">
+            <div className="flex items-center gap-[5px] rounded-[7px] border border-[#e5e7eb] bg-white px-3 py-[6px] dark:border-slate-600 dark:bg-slate-800/50">
               <span className="h-[6px] w-[6px] rounded-full bg-[#22c55e]" />
-              <span className="text-[11px] font-semibold text-[#0f172a]">3</span>
-              <span className="text-[11px] text-[#9ca3af]">Active Servers</span>
+              <span className="text-[11px] font-semibold text-[#0f172a] dark:text-slate-100">3</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-slate-500">Active Servers</span>
             </div>
-            <div className="flex items-center gap-[5px] rounded-[7px] border border-[#e5e7eb] bg-white px-3 py-[6px] text-[#6b7280]">
+            <div className="flex items-center gap-[5px] rounded-[7px] border border-[#e5e7eb] bg-white px-3 py-[6px] text-[#6b7280] dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-400">
               <GlobeIcon />
-              <span className="text-[11px] font-semibold text-[#0f172a]">3</span>
-              <span className="text-[11px] text-[#9ca3af]">Regions</span>
+              <span className="text-[11px] font-semibold text-[#0f172a] dark:text-slate-100">3</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-slate-500">Regions</span>
             </div>
-            <div className="hidden items-center gap-[5px] rounded-[7px] border border-[#e5e7eb] bg-white px-3 py-[6px] text-[#6b7280] lg:flex">
+            <div className="hidden items-center gap-[5px] rounded-[7px] border border-[#e5e7eb] bg-white px-3 py-[6px] text-[#6b7280] dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-400 lg:flex">
               <LightningIcon />
-              <span className="text-[11px] font-semibold text-[#0f172a]">99.99%</span>
-              <span className="text-[11px] text-[#9ca3af]">Uptime</span>
+              <span className="text-[11px] font-semibold text-[#0f172a] dark:text-slate-100">99.99%</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-slate-500">Uptime</span>
             </div>
           </div>
 
           {/* Server list heading */}
           <div className="mb-2 flex items-center justify-between">
             <div>
-              <div className="text-[13px] font-bold text-[#0f172a]">Your Servers</div>
-              <div className="text-[10px] text-[#9ca3af]">3 instances across 3 regions</div>
+              <div className="text-[13px] font-bold text-[#0f172a] dark:text-slate-100">Your Servers</div>
+              <div className="text-[10px] text-[#9ca3af] dark:text-slate-500">3 instances across 3 regions</div>
             </div>
             <div className="hidden items-center gap-1.5 sm:flex">
-              <div className="rounded-[5px] border border-[#e5e7eb] px-2 py-[3px] text-[9px] text-[#6b7280]">Filter</div>
-              <div className="rounded-[5px] border border-[#e5e7eb] px-2 py-[3px] text-[9px] text-[#6b7280]">Sort</div>
+              <div className="rounded-[5px] border border-[#e5e7eb] px-2 py-[3px] text-[9px] text-[#6b7280] dark:border-slate-600 dark:text-slate-400">
+                Filter
+              </div>
+              <div className="rounded-[5px] border border-[#e5e7eb] px-2 py-[3px] text-[9px] text-[#6b7280] dark:border-slate-600 dark:text-slate-400">
+                Sort
+              </div>
             </div>
           </div>
 
           {/* Server table */}
-          <div className="overflow-hidden rounded-[10px] border border-[#f0f0f2]">
-            <div className="grid grid-cols-[1fr_auto_auto_80px_60px] gap-3 border-b border-[#f0f0f2] bg-[#fafafa] px-4 py-[7px] text-[9px] font-semibold uppercase tracking-[0.07em] text-[#9ca3af]">
+          <div className="overflow-hidden rounded-[10px] border border-[#f0f0f2] dark:border-slate-700">
+            <div className="grid grid-cols-[1fr_auto_auto_80px_60px] gap-3 border-b border-[#f0f0f2] bg-[#fafafa] px-4 py-[7px] text-[9px] font-semibold uppercase tracking-[0.07em] text-[#9ca3af] dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-500">
               <span>Name</span>
               <span className="hidden sm:block">Region</span>
               <span className="hidden md:block">IP Address</span>
@@ -275,23 +286,27 @@ function VPSDashboard(): JSX.Element {
               <div
                 key={server.name}
                 className={`grid grid-cols-[1fr_auto_auto_80px_60px] items-center gap-3 px-4 py-[9px] text-[11px] ${
-                  idx < servers.length - 1 ? "border-b border-[#f0f0f2]" : ""
+                  idx < servers.length - 1 ? "border-b border-[#f0f0f2] dark:border-slate-700" : ""
                 }`}
               >
                 <div>
-                  <div className="font-semibold text-[#0f172a]">{server.name}</div>
-                  <div className="text-[9px] text-[#9ca3af]">{server.ip}</div>
+                  <div className="font-semibold text-[#0f172a] dark:text-slate-100">{server.name}</div>
+                  <div className="text-[9px] text-[#9ca3af] dark:text-slate-500">{server.ip}</div>
                 </div>
-                <div className="hidden text-[10px] text-[#6b7280] sm:block">{server.region}</div>
-                <div className="hidden font-mono text-[10px] text-[#9ca3af] md:block">{server.ip}</div>
+                <div className="hidden text-[10px] text-[#6b7280] dark:text-slate-400 sm:block">
+                  {server.region}
+                </div>
+                <div className="hidden font-mono text-[10px] text-[#9ca3af] dark:text-slate-500 md:block">
+                  {server.ip}
+                </div>
                 <div className="space-y-1">
-                  <div className="flex justify-between text-[9px] text-[#9ca3af]">
+                  <div className="flex justify-between text-[9px] text-[#9ca3af] dark:text-slate-500">
                     <span>CPU</span><span>{server.cpu}%</span>
                   </div>
                   <UsageBar pct={server.cpu} color="#0284c7" />
                 </div>
                 <div>
-                  <span className="rounded-[5px] bg-[#f0fdf4] px-[6px] py-[3px] text-[9px] font-semibold text-[#16a34a]">
+                  <span className="rounded-[5px] bg-[#f0fdf4] px-[6px] py-[3px] text-[9px] font-semibold text-[#16a34a] dark:bg-emerald-950/50 dark:text-emerald-400">
                     ● {server.status}
                   </span>
                 </div>
@@ -306,23 +321,25 @@ function VPSDashboard(): JSX.Element {
               { label: "Avg RAM",      value: "65%",    sub: "6.5 / 10 GB used",  bar: 65, color: "#7c3aed" },
               { label: "Network Out",  value: "2.4 GB", sub: "Last 24 hours",      bar: 48, color: "#0d9488" },
             ].map((metric) => (
-              <div key={metric.label} className="rounded-[9px] border border-[#f0f0f2] bg-[#fafafa] p-3">
-                <div className="mb-1 text-[9px] font-semibold uppercase tracking-[0.07em] text-[#9ca3af]">
+              <div
+                key={metric.label}
+                className="rounded-[9px] border border-[#f0f0f2] bg-[#fafafa] p-3 dark:border-slate-700 dark:bg-slate-900/70"
+              >
+                <div className="mb-1 text-[9px] font-semibold uppercase tracking-[0.07em] text-[#9ca3af] dark:text-slate-500">
                   {metric.label}
                 </div>
-                <div className="text-[18px] font-bold leading-none text-[#0f172a]">{metric.value}</div>
+                <div className="text-[18px] font-bold leading-none text-[#0f172a] dark:text-slate-100">
+                  {metric.value}
+                </div>
                 <div className="mt-2">
                   <UsageBar pct={metric.bar} color={metric.color} />
                 </div>
-                <div className="mt-1 text-[9px] text-[#9ca3af]">{metric.sub}</div>
+                <div className="mt-1 text-[9px] text-[#9ca3af] dark:text-slate-500">{metric.sub}</div>
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Bottom fade */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[140px] bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.55)_45%,rgba(255,255,255,0.97)_100%)]" />
     </div>
   );
 }
@@ -338,26 +355,29 @@ export function Hero(): JSX.Element {
     <>
       <VantaClouds />
 
+      {/* Dark: soft cyan/sky glow behind headline — adds depth without flat gray */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[5] hidden h-[min(560px,85vh)] dark:block bg-[radial-gradient(ellipse_75%_55%_at_50%_36%,rgba(34,211,238,0.14)_0%,rgba(59,130,246,0.06)_42%,transparent_68%)]"
+        aria-hidden
+      />
+
       {/* Hero text */}
       <section
         ref={sectionRef}
-        className="relative z-10 px-6 pb-20 pt-[108px] text-center sm:px-8 sm:pb-24"
+        className="relative z-10 px-6 pb-20 pt-[108px] text-center sm:px-10 sm:pb-24"
       >
         <div className="mx-auto flex max-w-[900px] flex-col items-center">
           {/* Headline */}
           <h1
-            className="mb-6 w-full text-center text-[clamp(36px,5vw,64px)] font-normal leading-[1.15] tracking-[-0.01em] text-white"
-            style={{ textShadow: "0 4px 24px rgba(0,0,0,0.15)" }}
+            className="mb-6 w-full text-center text-[clamp(36px,5vw,64px)] font-normal leading-[1.15] tracking-[-0.01em] text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.15)] dark:[text-shadow:0_4px_36px_rgba(0,0,0,0.45),0_0_60px_rgba(34,211,238,0.12)]"
           >
-            <span className="block">Deploy Cloud Servers</span>
-            <span className="block">at Lightning Speed</span>
+            Deploy Cloud Servers
+            <br />
+            at Lightning Speed
           </h1>
 
           {/* Subtitle */}
-          <p 
-            className="mb-10 max-w-[600px] text-center text-[clamp(16px,2vw,20px)] font-normal leading-[1.6] text-white/90"
-            style={{ textShadow: "0 2px 12px rgba(0,0,0,0.15)" }}
-          >
+          <p className="mb-12 max-w-[600px] text-center text-[clamp(16px,2vw,20px)] font-normal leading-[1.65] text-white/90 [text-shadow:0_2px_12px_rgba(0,0,0,0.15)] dark:text-sky-100/85 dark:[text-shadow:0_2px_20px_rgba(0,0,0,0.35)]">
             Launch high-performance VPS instances globally in under 60 seconds.
           </p>
 
@@ -367,7 +387,7 @@ export function Hero(): JSX.Element {
               type="button"
               whileHover={{ scale: 1.025, transition: { type: "spring", stiffness: 400, damping: 20 } }}
               whileTap={{ scale: 0.97, transition: { duration: 0.12 } }}
-              className="rounded-full bg-[#1a1a1a] px-8 py-[14px] text-[15px] font-medium text-white shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-colors duration-150 hover:bg-black"
+              className="rounded-full bg-[#1a1a1a] px-8 py-[14px] text-[15px] font-medium text-white shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-colors duration-150 hover:bg-black dark:bg-slate-100 dark:text-slate-900 dark:shadow-[0_4px_14px_rgba(0,0,0,0.35)] dark:hover:bg-white"
             >
               Create a Free Account
             </motion.button>
@@ -377,7 +397,7 @@ export function Hero(): JSX.Element {
 
       {/* Dashboard mockup */}
       <section className="relative z-20 -mt-6 px-6 sm:px-10">
-        <div className="relative z-20 mx-auto max-w-[1020px]">
+        <div className="relative z-20 mx-auto w-full max-w-[1060px]">
           <motion.div style={{ y: mockupY }}>
             <motion.div
               initial={{ opacity: 0, y: 48 }}

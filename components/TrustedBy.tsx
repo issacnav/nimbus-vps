@@ -112,7 +112,7 @@ export function TrustedBy(): JSX.Element {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.45, ease: EASE }}
-        className="mb-10 text-[13px] font-medium uppercase tracking-[0.08em] text-[#9ca3af]"
+        className="mb-10 text-[13px] font-medium uppercase tracking-[0.08em] text-zinc-500 dark:text-zinc-500"
       >
         Trusted by teams shipping at scale
       </motion.p>
@@ -128,7 +128,7 @@ export function TrustedBy(): JSX.Element {
           <motion.span
             key={logo.name}
             variants={logoItem}
-            className="flex items-center gap-[8px] text-[15px] font-semibold text-[#c0c0c8] transition-colors duration-200 hover:text-[#9ca3af]"
+            className="flex items-center gap-[8px] text-[15px] font-semibold text-zinc-400 transition-colors duration-200 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-400"
           >
             <span className="flex items-center">
               <logo.Icon />

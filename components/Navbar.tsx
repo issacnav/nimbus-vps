@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const ENTER_EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -59,12 +60,12 @@ export function Navbar(): JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="relative z-[100] flex justify-center px-4 pt-5 sm:px-8">
+    <div className="relative z-[100] flex justify-center px-6 pt-5 sm:px-10">
       <motion.nav
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: ENTER_EASE }}
-        className="relative flex w-full max-w-[980px] items-center justify-between rounded-full border border-white/25 bg-white/[0.14] px-[18px] py-[8px] pr-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_4px_24px_rgba(0,0,0,0.06)] backdrop-blur-[32px]"
+        className="relative flex w-full max-w-[1060px] items-center justify-between rounded-full border border-white/25 bg-white/[0.14] px-[18px] py-[8px] pr-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_4px_24px_rgba(0,0,0,0.06)] backdrop-blur-[32px] dark:border-cyan-200/20 dark:bg-slate-950/40 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_8px_40px_rgba(0,0,0,0.45),0_0_0_1px_rgba(34,211,238,0.06)]"
       >
         {/* Logo */}
         <div className="flex shrink-0 items-center gap-[9px]">
@@ -87,26 +88,28 @@ export function Navbar(): JSX.Element {
           ))}
         </div>
 
-        {/* Desktop CTA */}
-        <button
-          type="button"
-          className="hidden shrink-0 items-center gap-[6px] rounded-full bg-[#0f172a] px-[18px] py-[9px] text-[13.5px] font-medium text-white transition-opacity duration-150 hover:opacity-90 md:inline-flex"
-        >
-          <span>Deploy Now</span>
-          <span className="inline-block h-[6px] w-[6px] rounded-full bg-[#22d3ee]" />
-        </button>
-
-        {/* Mobile hamburger */}
-        <button
-          type="button"
-          aria-controls="mobile-navigation"
-          aria-expanded={isMenuOpen}
-          aria-label="Toggle navigation"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/10 md:hidden"
-          onClick={() => setIsMenuOpen((current) => !current)}
-        >
-          <MenuIcon open={isMenuOpen} />
-        </button>
+        {/* Theme + desktop CTA */}
+        <div className="flex shrink-0 items-center gap-2">
+          <ThemeToggle placement="hero" />
+          <button
+            type="button"
+            className="hidden shrink-0 items-center gap-[6px] rounded-full bg-[#0f172a] px-[18px] py-[9px] text-[13.5px] font-medium text-white transition-opacity duration-150 hover:opacity-90 md:inline-flex dark:bg-slate-800 dark:ring-1 dark:ring-cyan-500/25"
+          >
+            <span>Deploy Now</span>
+            <span className="inline-block h-[6px] w-[6px] rounded-full bg-[#22d3ee]" />
+          </button>
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            aria-controls="mobile-navigation"
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/10 md:hidden"
+            onClick={() => setIsMenuOpen((current) => !current)}
+          >
+            <MenuIcon open={isMenuOpen} />
+          </button>
+        </div>
 
         {/* Mobile menu dropdown */}
         {isMenuOpen ? (
@@ -127,7 +130,7 @@ export function Navbar(): JSX.Element {
               ))}
               <button
                 type="button"
-                className="mt-1 inline-flex items-center justify-center gap-[6px] rounded-full bg-[#0f172a] px-[18px] py-[9px] text-[13.5px] font-medium text-white"
+                className="mt-1 inline-flex items-center justify-center gap-[6px] rounded-full bg-[#0f172a] px-[18px] py-[9px] text-[13.5px] font-medium text-white dark:bg-slate-800 dark:ring-1 dark:ring-cyan-500/25"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span>Deploy Now</span>
