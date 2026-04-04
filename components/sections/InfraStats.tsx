@@ -3,7 +3,7 @@
 import { useDarkClass } from "@/lib/useDarkClass";
 import { animate, motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { PlusMarker } from "./SectionMarkers";
+import { PlusMarker } from "@/components/ui/SectionMarkers";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 

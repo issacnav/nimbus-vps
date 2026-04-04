@@ -3,7 +3,7 @@
 import { useDarkClass } from "@/lib/useDarkClass";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { TrustedBy } from "./TrustedBy";
+import { TrustedBy } from "@/components/ui/TrustedBy";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 

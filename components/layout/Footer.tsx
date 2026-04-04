@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const LINKS = {
   Product: ["Compute", "Networking", "Volumes", "Snapshots", "Firewall"],
